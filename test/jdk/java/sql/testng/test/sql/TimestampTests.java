@@ -643,6 +643,16 @@ public class TimestampTests extends BaseTest {
     }
 
     /*
+     * Validate an ArithmeticException occurs when a too large Instant
+     * is passed to from() .. rather than silently overflow.
+     */
+    @Test(expectedExceptions = ArithmeticException.class)
+    public void test53() throws Exception {
+        Instant instant = Instant.MAX;
+        Timestamp.from(instant);
+    }
+
+    /*
      * DataProvider used to provide Timestamps which are not valid and are used
      * to validate that an IllegalArgumentException will be thrown from the
      * valueOf method
